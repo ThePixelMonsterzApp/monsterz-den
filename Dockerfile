@@ -1,15 +1,15 @@
-FROM node:0.12
+FROM node:4
 
 # This is needed for node-canvas dependency on cairo. Annoyingly large...
 RUN apt-get update && apt-get install -yy --no-install-recommends \
      libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev \
      build-essential g++
 
-#Create non-root user
+# Create non-root user
 RUN groupadd -r dnmonster && useradd -r -g dnmonster dnmonster
 
-#Following is effectively onbuild image. We can't use the official onbuild image
-#as it would run the above line everytime which is very tiresome
+# Following is effectively onbuild image. We can't use the official onbuild image
+# as it would run the above line everytime which is very tiresome
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
